@@ -4,5 +4,12 @@ const db = sql('meals.db');
 
 export async function getMeals() {
   await new Promise((resolve) => setTimeout(resolve, 2000));
+  // throw new Error('Failed to fetch meals');
   return db.prepare('SELECT * FROM meals').all();
+}
+
+export function getMeal(slug: string) {
+  new Promise((resolve) => setTimeout(resolve, 2000));
+  const stmt = db.prepare('SELECT * FROM meals WHERE slug = ?');
+  return stmt.get(slug);
 }
